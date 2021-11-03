@@ -1,5 +1,9 @@
 library(terra)
 
+
+#### NOTE: this code is not tested. Will likely need to replace functions such as stack()
+####       with the new functions from the terra package
+
 x_dir    <- "//isilondata.rccc.ou.edu/eomfdata/TROPOMI/gridded/official-Philipp/4326/fixed/2018"
 y_dir    <- "G:/MCD43C4/0.20/8-day_nirv"
 out_dir  <- "C:/Russell/R_Scripts/TROPOMI_2/regression_rasters/8-day/0.20/MCD43"
