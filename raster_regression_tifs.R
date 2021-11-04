@@ -1,8 +1,7 @@
-library(terra)
+library(raster)
 
-
-#### NOTE: this code is not tested. Will likely need to replace functions such as stack()
-####       with the new functions from the terra package
+#### NOTE: this code is not tested. The cluster functions are not in the terra package,
+####       so it is likely tricky to update this code for terra
 
 x_dir    <- "//isilondata.rccc.ou.edu/eomfdata/TROPOMI/gridded/official-Philipp/4326/fixed/2018"
 y_dir    <- "G:/MCD43C4/0.20/8-day_nirv"
