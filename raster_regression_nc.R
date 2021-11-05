@@ -1,11 +1,13 @@
-# library(terra)
+
 library(raster)
 
 in_file  <- "G:/TROPOMI/esa/gridded/TROPOMI.SIF.201805-202108.global.clearsky.20km.modisLike.esa.735nm.nc"
 x_name   <- "NIRv"
 y_name   <- "SIF_743"
-out_dir  <- "G:/Russell/Projects/SLUE/raster_regressions/global_clearsky"
-out_name <- "TROPOMI_SIF_vs_NIRv_0.20_global_clearksy_201805-202108"
+out_dir  <- "G:/Russell/Projects/SLUE/raster_regressions/global_clearsky/SIF743_NIRv/n30"
+out_name <- "TROPOMI_SIF743_vs_NIRv_0.20_global_clearsky_n30_201805-202108"
+f_name   <- "n" # Filter by value. Example, error, std, or n. If none use NA.
+f_thresh <- 30 # Values => will be kept
 
 rastlm <- function(x) {
   full <- length(x)
@@ -36,6 +38,19 @@ rast_reg <- function(in_file, x_name, y_name, out_dir, out_name) {
   
   y <- mask(y, x)
   x <- mask(x, y)
+  
+  # Filter as needed
+  if (!is.na(f_name)) {
+    print(paste0("Filtering data using: ", f_name))
+    print(paste0("Filter threshold is: ", f_thresh))
+    
+    f <- brick(in_file, varname = f_name)
+    f[f < f_thresh] <- NA
+    
+    y <- mask(y, f)
+    x <- mask(x, f)
+
+  }
   
   # Combine bricks into single brick. lm convention is y~x
   yx <- stack(y, x)
