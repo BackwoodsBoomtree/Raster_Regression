@@ -1,12 +1,12 @@
 
 library(raster)
 
-in_file  <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/TROPOMI.ESA.SIF.2018-2021.EBF.monthly.1deg.clearsky.cold.nc"
-x_name   <- "NIRv_RAD"
+in_file  <- "G:/TROPOMI/esa/gridded/1deg/monthly/ebf/TROPOMI.ESA.SIF.2018-2021.EBF90.monthly.1deg.clearsky.nc"
+x_name   <- "NIRv"
 y_name   <- "SIF_743"
-out_dir  <- "G:/SIF_comps/figs/raster_regressions/clearsky_cold"
-out_name <- "TROPOMI_SIF743_vs_NIRv_RAD_monthly_1deg_clearsky_cold_n30_2018-2021"
-f_name   <- "n" # Filter by value. Example, error, std, or n. If none use NA.
+out_dir  <- "G:/SIF_comps/figs/raster_regressions/clearsky"
+out_name <- "TROPOMI_SIF743_vs_NIRv_monthly_1deg_clearsky_n30_2018-2021"
+f_name   <- NA # Filter by value. Example, error, std, or n. If none use NA.
 f_thresh <- 30 # Values >= will be kept
 
 rastlm <- function(x) {
