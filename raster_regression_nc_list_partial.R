@@ -3,28 +3,27 @@ library(raster)
 library(ncdf4)
 library(parallel)
 
-x_list  <- list.files("G:/TROPOMI/esa/gridded/1deg/sun_global/CF80", pattern = "*.nc", full.names = TRUE)
-y_list  <- list.files("G:/SIF_OCO2_005/1deg", pattern = "*.nc", full.names = TRUE)
+x_list  <- list.files("G:/TROPOMI/esa/gridded/1deg/16day/CF80", pattern = "*.nc", full.names = TRUE)
+y_file  <- "G:/CSIF/1deg/CSIF.daily.2019-2020.1deg.16-day.nc"
 x_name   <- "SIF_Corr_743"
-y_name   <- "sif_ann"
-out_dir  <- "G:/SIF_comps/figs/raster_regressions/CF80/sun_global"
-out_name <- "TROPOMI_SIF_Corr_vs_Sun_SIF_1deg_CF80_2019-2020"
+y_name   <- "clear_daily_SIF"
+out_dir  <- "G:/SIF_comps/figs/raster_regressions/CF80/csif"
+out_name <- "TROPOMI_SIF_Corr_vs_CSIF_1deg_CF80_2019-2020"
 f_name   <- NA # Filter by value. Example, error, std, or n. If none use NA.
 f_thresh <- 30 # Values >= will be kept
 
 # Build bricks from list
 for (i in 1:length(x_list)) {
-  x_t <- raster(x_list[i], varname = x_name)
-  y_t <- raster(y_list[i], varname = y_name)
-  
+  x_t <- stack(x_list[i], varname = x_name)
+
   if (i == 1) {
     x_stack <- x_t
-    y_stack <- y_t
   } else {
-    x_stack <- addLayer(x_stack, x_t)
-    y_stack <- addLayer(y_stack, y_t)
+    x_stack <- stack(x_stack, x_t)
   }
 }
+
+y_stack <- stack(y_file, varname = y_name)
 
 rastlm <- function(x) {
   full <- length(x)
