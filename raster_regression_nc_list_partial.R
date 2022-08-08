@@ -3,12 +3,12 @@ library(raster)
 library(ncdf4)
 library(parallel)
 
-x_list  <- list.files("G:/TROPOMI/esa/gridded/1deg/16day/CF80", pattern = "*.nc", full.names = TRUE)
-y_file  <- "G:/CSIF/1deg/CSIF.daily.2019-2020.1deg.16-day.nc"
+x_list  <- list.files("G:/TROPOMI/esa/gridded/1deg/16day/clearsky", pattern = "*.nc", full.names = TRUE)
+y_file  <- "G:/GOSIF/16-day/GOSIF.2019-2020.1deg.16-day.nc"
 x_name   <- "SIF_Corr_743"
-y_name   <- "clear_daily_SIF"
-out_dir  <- "G:/SIF_comps/figs/raster_regressions/CF80/csif"
-out_name <- "TROPOMI_SIF_Corr_vs_CSIF_1deg_CF80_2019-2020"
+y_name   <- "gosif"
+out_dir  <- "G:/SIF_comps/figs/raster_regressions/clearsky/gosif"
+out_name <- "TROPOMI_SIF_Corr_vs_GOSIF_1deg_clearsky_2019-2020"
 f_name   <- NA # Filter by value. Example, error, std, or n. If none use NA.
 f_thresh <- 30 # Values >= will be kept
 
